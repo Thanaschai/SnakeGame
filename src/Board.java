@@ -2,7 +2,7 @@ package src;
 
 public class Board {
 
-	private Tile[][] tile = new Tile[10][10];
+	private final Tile[][] tile = new Tile[10][10];
 	Player player1;
 	Player player2;
 	Dice dice;
