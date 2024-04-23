@@ -1,4 +1,4 @@
-package Snake_Ladder;
+package src;
 
 public class Board {
 
@@ -7,71 +7,84 @@ public class Board {
 	Player player2;
 	Dice dice;
 
+	/**
+	 * 
+	 */
 	public Board() // เป็นเมทอดที่ถูกเรียกเมื่อสร้างอ็อบเจกต์ของคลาส Board
 					// โดยในเมทอดนี้จะมีการสร้างและกำหนดค่าเริ่มต้นให้กับกริดของกระดานเกม
 					// รวมถึงสร้างและตั้งค่าตำแหน่งของงูและบันได
 	{
 		// loop เพื่อสร้างตาราง 100 - 90 --> มีแค่ 10 ตัวต่อแถว
-		// กำหนด c เป็นตัวเริ่ม ว่าให้เริ่มที่เท่าไหร่
+		// กำหนด cell เป็นตัวเริ่ม ว่าให้เริ่มที่เท่าไหร่
 		// null ว่างไว้เพราะไม่มีอะไร
-		int c = 100;
-		for (int j = 0; j <= 9; j++) {
-			tile[0][j] = new Tile(c, null, null);
-			c = c - 1;
+		int cell = 100;
+
+		for (int col = 0; col <= 9; col++) {
+			tile[0][col] = new Tile(cell, null, null);
+			cell = cell - 1;
 		}
 
-		c = 81;
-		for (int j = 0; j <= 9; j++) {
-			tile[1][j] = new Tile(c, null, null);
-			c = c + 1;
+		cell = 81;
+
+		for (int col = 0; col <= 9; col++) {
+			tile[1][col] = new Tile(cell, null, null);
+			cell = cell + 1;
 		}
 
-		c = 80;
-		for (int j = 0; j <= 9; j++) {
-			tile[2][j] = new Tile(c, null, null);
-			c = c - 1;
+		cell = 80;
+
+		for (int col = 0; col <= 9; col++) {
+			tile[2][col] = new Tile(cell, null, null);
+			cell = cell - 1;
 		}
 
-		c = 61;
-		for (int j = 0; j <= 9; j++) {
-			tile[3][j] = new Tile(c, null, null);
-			c = c + 1;
+		cell = 61;
+
+		for (int col = 0; col <= 9; col++) {
+			tile[3][col] = new Tile(cell, null, null);
+			cell = cell + 1;
 		}
 
-		c = 60;
-		for (int j = 0; j <= 9; j++) {
-			tile[4][j] = new Tile(c, null, null);
-			c = c - 1;
+		cell = 60;
+
+		for (int col = 0; col <= 9; col++) {
+			tile[4][col] = new Tile(cell, null, null);
+			cell = cell - 1;
 		}
 
-		c = 41;
-		for (int j = 0; j <= 9; j++) {
-			tile[5][j] = new Tile(c, null, null);
-			c = c + 1;
+		cell = 41;
+
+		for (int col = 0; col <= 9; col++) {
+			tile[5][col] = new Tile(cell, null, null);
+			cell = cell + 1;
 		}
 
-		c = 40;
-		for (int j = 0; j <= 9; j++) {
-			tile[6][j] = new Tile(c, null, null);
-			c = c - 1;
+		cell = 40;
+
+		for (int col = 0; col <= 9; col++) {
+			tile[6][col] = new Tile(cell, null, null);
+			cell = cell - 1;
 		}
 
-		c = 21;
-		for (int j = 0; j <= 9; j++) {
-			tile[7][j] = new Tile(c, null, null);
-			c = c + 1;
+		cell = 21;
+
+		for (int col = 0; col <= 9; col++) {
+			tile[7][col] = new Tile(cell, null, null);
+			cell = cell + 1;
 		}
 
-		c = 20;
-		for (int j = 0; j <= 9; j++) {
-			tile[8][j] = new Tile(c, null, null);
-			c = c - 1;
+		cell = 20;
+
+		for (int col = 0; col <= 9; col++) {
+			tile[8][col] = new Tile(cell, null, null);
+			cell = cell - 1;
 		}
 
-		c = 1;
-		for (int j = 0; j <= 9; j++) {
-			tile[9][j] = new Tile(c, null, null);
-			c = c + 1;
+		cell = 1;
+
+		for (int col = 0; col <= 9; col++) {
+			tile[9][col] = new Tile(cell, null, null);
+			cell = cell + 1;
 		}
 
 		// สร้าง player ซึ่งกำหนดไว้แค่ 2 คน
@@ -123,18 +136,18 @@ public class Board {
 		System.out.println("'*' stands for Snake's Mouth");
 		System.out.println("");
 
-		for (int i = 0; i < 10; i++) {
-			for (int j = 0; j < 10; j++) {
-				if (tile[i][j].snake == null && tile[i][j].ladder == null) {
-					if (tile[i][j].value == 100)
-						System.out.print(tile[i][j].value + " "); // 100 99
-					else if (tile[i][j].value >= 11 && tile[i][j].value <= 99)
-						System.out.print(tile[i][j].value + "  ");// 99 98
-					else if (tile[i][0].value == 1)
-						System.out.print(tile[i][j].value + "   ");// 1 2 3
-				} else if (tile[i][j].snake == null && tile[i][j].ladder != null) {
+		for (int rows = 0; rows < 10; rows++) {
+			for (int columns = 0; columns < 10; columns++) {
+				if (tile[rows][columns].snake == null && tile[rows][columns].ladder == null) {
+					if (tile[rows][columns].value == 100)
+						System.out.print(tile[rows][columns].value + " "); // 100 99
+					else if (tile[rows][columns].value >= 11 && tile[rows][columns].value <= 99)
+						System.out.print(tile[rows][columns].value + "  ");// 99 98
+					else if (tile[rows][0].value == 1)
+						System.out.print(tile[rows][columns].value + "   ");// 1 2 3
+				} else if (tile[rows][columns].snake == null && tile[rows][columns].ladder != null) {
 					System.out.print("=   "); // print ladder
-				} else if (tile[i][j].snake != null && tile[i][j].ladder == null) {
+				} else if (tile[rows][columns].snake != null && tile[rows][columns].ladder == null) {
 					System.out.print("*   "); // print Snake
 				}
 			}
@@ -157,15 +170,15 @@ public class Board {
 		}
 	}
 
-	public void throwDice(String plyr) {// ทำหน้าที่สุ่มค่าลูกเต๋า และเลื่อนตำแหน่งของผู้เล่นที่ระบุ (player1 หรือ
-										// player2) ตามค่าที่สุ่มได้
-										// และตรวจสอบว่าตำแหน่งใหม่ของผู้เล่นนั้นต้องการให้ย้ายไปยังบันไดหรืองูหรือไม่
-										// และแสดงข้อความตามผลลัพธ์ของการเคลื่อนที่
+	public void rollDice(String player) {// ทำหน้าที่สุ่มค่าลูกเต๋า และเลื่อนตำแหน่งของผู้เล่นที่ระบุ (player1 หรือ
+											// player2) ตามค่าที่สุ่มได้
+											// และตรวจสอบว่าตำแหน่งใหม่ของผู้เล่นนั้นต้องการให้ย้ายไปยังบันไดหรืองูหรือไม่
+											// และแสดงข้อความตามผลลัพธ์ของการเคลื่อนที่
 		int d_value = dice.getDiceValue();
 		System.out.println("Random Dice Value generated = " + d_value);
 		System.out.println("");
 
-		if (plyr.equals("player1")) {
+		if (player.equals("player1")) {
 			int temp = this.player1.position; // temp ให้เป็นตำแหน่งปัจจุบัน
 			if (this.player1.position + d_value > 100) { // move position dice มากกว่า 100 ให้อยู่ในตำแหน่งเดิมครับ
 				temp = this.player1.position; // ตำแหน่งเดิม
@@ -191,7 +204,7 @@ public class Board {
 				System.out.println("Player1's Current Position = " + this.player1.position); // ปริ้นตำแหน่ง
 				System.out.println("Player2's Current Position = " + this.player2.position); // ปริ้นตำแหน่ง
 			}
-		} else if (plyr.equals("player2")) {
+		} else if (player.equals("player2")) {
 			int temp = this.player2.position;
 			if (this.player2.position + d_value > 100) { // ตรวจสอบว่า player 2 ถ้ามีการเคลื่อนที่จะเกินตำแหน่งที่ 100
 															// หรือไม่
@@ -200,38 +213,35 @@ public class Board {
 				temp = this.player2.position + d_value;
 			}
 
-			int i = iIndexOfTile(temp);
-			int j = jIndexOfTile(temp);
-			if ((tile[i][j].ladder == null) && (tile[i][j].snake == null)) {
+			int rows = iIndexOfTile(temp);
+			int columns = jIndexOfTile(temp);
+			if ((tile[rows][columns].ladder == null) && (tile[rows][columns].snake == null)) {
 				// ไม่มีบันไดหรืองูที่อยู่ใน tile นั้น ๆ ดังนั้นเราใช้ "null"
 				// เพื่อบ่งบอกว่าไม่มีบันไดหรืองูในตำแหน่งนั้น ๆ
 				if ((this.player2.position + d_value) <= 100)
 					this.player2.position = this.player2.position + d_value;
 				System.out.println("Player1's Current Position = " + this.player1.position);
 				System.out.println("Player2's Current Position = " + this.player2.position);
-			} else if ((tile[i][j].ladder != null) && (tile[i][j].snake == null)) {
+			} else if ((tile[rows][columns].ladder != null) && (tile[rows][columns].snake == null)) {
 				System.out.println("Congrats Player2 You Got Ladder");
-				this.player2.position = tile[i][j].ladder.finalPosition;
+				this.player2.position = tile[rows][columns].ladder.finalPosition;
 				System.out.println("Player1's Current Position = " + this.player1.position);
 				System.out.println("Player2's Current Position = " + this.player2.position);
-			} else if ((tile[i][j].ladder == null) && (tile[i][j].snake != null)) {
+			} else if ((tile[rows][columns].ladder == null) && (tile[rows][columns].snake != null)) {
 				System.out.println("Oops! Player2 You Got Snake Bite!");
-				this.player2.position = tile[i][j].snake.finalPosition;
+				this.player2.position = tile[rows][columns].snake.finalPosition;
 				System.out.println("Player1's Current Position = " + this.player1.position);
 				System.out.println("Player2's Current Position = " + this.player2.position);
 			}
 		}
 	}
 
-	private int iIndexOfTile(int x) { // ทำหน้าที่ค้นหาและคืนค่าดัชนี i และ j ของ tile ที่มีค่า value เท่ากับ x และ y
-										// ตามลำดับ
-										// ฟังก์ชันนี้รับค่า x ซึ่งเป็นค่าที่ต้องการค้นหาใน tile array
-		for (int i = 0; i < 10; i++) {
-			for (int j = 0; j < 10; j++) {
-				if (this.tile[i][j].value == x) {// เมื่อพบค่า x ที่ตรงกัน ฟังก์ชันจะคืนค่าดัชนีของแถว (i) ที่พบค่า x
-													// นั้น
+	private int iIndexOfTile(int x) {
+		for (int rows = 0; rows < 10; rows++) {
+			for (int columns = 0; columns < 10; columns++) {
+				if (this.tile[rows][columns].value == x) {
 
-					return i;
+					return rows;
 				}
 			}
 		}
@@ -240,10 +250,10 @@ public class Board {
 	}
 
 	private int jIndexOfTile(int y) {
-		for (int i = 0; i < 10; i++) {
-			for (int j = 0; j < 10; j++) {
-				if (this.tile[i][j].value == y) {
-					return j;
+		for (int rows = 0; rows < 10; rows++) {
+			for (int columns = 0; columns < 10; columns++) {
+				if (this.tile[rows][columns].value == y) {
+					return columns;
 				}
 			}
 		}
