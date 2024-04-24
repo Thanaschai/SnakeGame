@@ -13,7 +13,7 @@ public class Game {
 		System.out.println("Player1's Current Position = " + BoardForGame.player1.position);
 		System.out.println("Player2's Current Position = " + BoardForGame.player2.position);
 
-		while (!BoardForGame.WhoThewinner()) {
+		while (!BoardForGame.WhoTheWinner()) {
 
 			if (Player1Turn) {
 				Player1Turn = false;
@@ -21,7 +21,7 @@ public class Game {
 				System.out.println("To throw dice Enter 1\nTo quit game Enter 0\nnumberForMoveOrEnd ");
 				numberForMoveOrEnd = ScannerNumber.nextInt();
 
-				if (numberForMoveOrEnd == 1) {// หากผู้เล่นเลือกทอยลูกเต๋าให้เรียกเมธอด throwDice ของอ็อบเจ็กต์ BoardForGame
+				if (numberForMoveOrEnd == 1) {
 					BoardForGame.display();
 					BoardForGame.rollDice("player1");
 				} else if (numberForMoveOrEnd == 0) {

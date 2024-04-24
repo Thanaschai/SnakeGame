@@ -8,26 +8,17 @@ public class Board {
 	Dice dice;
 
 	public Board() {//Snake , ladder , tile
-		// Assuming tile is declared as a 2D array of Tile objects
-		Tile[][] tile = new Tile[11][11]; // Assuming you want an 11x11 grid
+		int[] cell = {100, 81, 80, 61, 60, 41, 40, 21, 20, 1};
 
-		int[] cell = {100, 99, 81, 80, 61, 60, 41, 40, 21, 20, 1};
-
-		for (int ChasingIndexInCell = 0; ChasingIndexInCell < cell.length; ChasingIndexInCell++) {
-			for (int col = 0; col < 11; col++) {
+		for (int ChasingIndexInCell = 0; ChasingIndexInCell <= 9; ChasingIndexInCell++) {
+			for (int col = 0; col <= 9 ; col++) {
 				tile[ChasingIndexInCell][col] = new Tile(cell[ChasingIndexInCell], null, null);
-				cell[ChasingIndexInCell] -= 1;
+				if(ChasingIndexInCell % 2 == 0){
+					cell[ChasingIndexInCell] -= 1;
+				}
+				else{cell[ChasingIndexInCell] += 1;}
 			}
 		}
-		/*int[] cell = {100,99,81,80,61,60,41,40,21,20,1};
-
-		for(int ChasingIndexInCell = 0; ChasingIndexInCell <= cell.length ;ChasingIndexInCell++){
-			for (int col = 0; col <= 10; col++) {
-				tile[ChasingIndexInCell][col] = new Tile(cell[ChasingIndexInCell], null, null);
-				cell[ChasingIndexInCell] -=1 ;
-			}
-		}*/
-
 
 		/*int cell = 100;
 
@@ -148,6 +139,7 @@ public class Board {
 		System.out.println("");
 
 		for (int rows = 0; rows < 10; rows++) {
+
 			for (int columns = 0; columns < 10; columns++) {
 				if (tile[rows][columns].snake == null && tile[rows][columns].ladder == null) {
 					if (tile[rows][columns].value == 100)
@@ -167,7 +159,7 @@ public class Board {
 		System.out.println("");
 	}
 
-	public boolean WhoThewinner() {
+	public boolean WhoTheWinner() {
 
 		if (this.player1.position == 100) {
 			System.out.println("Congrats! Player1 won!");
@@ -193,12 +185,12 @@ public class Board {
 				current = this.player1.position + DiceValue;
 			}
 
-			int rows = iIndexOfTile(current);
-			int columns = jIndexOfTile(current);
+			int rows = RowIndexOfTile(current);
+			int columns = ColIndexOfTile(current);
 
 			if ((tile[rows][columns].ladder == null) && (tile[rows][columns].snake == null)) {
 				if ((this.player1.position + DiceValue) <= 100)
-					this.player1.position = this.player1.position + DiceValue;
+				this.player1.position = this.player1.position + DiceValue;
 				System.out.println("Player1's Current Position = " + this.player1.position);
 				System.out.println("Player2's Current Position = " + this.player2.position);
 			} else if ((tile[rows][columns].ladder != null) && (tile[rows][columns].snake == null)) {
@@ -220,13 +212,12 @@ public class Board {
 			} else {
 				current = this.player2.position + DiceValue;
 			}
-			int rows = iIndexOfTile(current);
-			int columns = jIndexOfTile(current);
+			int rows = RowIndexOfTile(current);
+			int columns = ColIndexOfTile(current);
 
 			if ((tile[rows][columns].ladder == null) && (tile[rows][columns].snake == null)) {
-				// ไม่มีบันไดหรืองูที่อยู่ใน tile นั้น ๆ ดังนั้นเราใช้ "null เพื่อบ่งบอกว่าไม่มีบันไดหรืองูในตำแหน่งนั้น ๆ
 				if ((this.player2.position + DiceValue) <= 100)
-					this.player2.position = this.player2.position + DiceValue;
+				this.player2.position = this.player2.position + DiceValue;
 				System.out.println("Player1's Current Position = " + this.player1.position);
 				System.out.println("Player2's Current Position = " + this.player2.position);
 			} else if ((tile[rows][columns].ladder != null) && (tile[rows][columns].snake == null)) {
@@ -243,24 +234,23 @@ public class Board {
 		}
 	}
 
-	private int iIndexOfTile(int x) {
+	private int RowIndexOfTile(int getCurrentRow) {
 
 		for (int rows = 0; rows < 10; rows++) {
 			for (int columns = 0; columns < 10; columns++) {
-				if (this.tile[rows][columns].value == x) {
+				if (this.tile[rows][columns].value == getCurrentRow) {
 					return rows;
 				}
 			}
 		}
 		return -1;
-		// ถ้าหากไม่พบค่า x ใน tile array ฟังก์ชันจะคืนค่า -1 เพื่อบ่งบอกว่าค่าไม่พบในอาร์เรย์
 	}
 
-	private int jIndexOfTile(int y) {
+	private int ColIndexOfTile(int GetCurrentCol) {
 
 		for (int rows = 0; rows < 10; rows++) {
 			for (int columns = 0; columns < 10; columns++) {
-				if (this.tile[rows][columns].value == y) {
+				if (this.tile[rows][columns].value == GetCurrentCol) {
 					return columns;
 				}
 			}
