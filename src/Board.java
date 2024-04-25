@@ -13,6 +13,7 @@ public class Board {
 		for (int ChasingIndexInCell = 0; ChasingIndexInCell <= 9; ChasingIndexInCell++) {
 			for (int col = 0; col <= 9 ; col++) {
 				tile[ChasingIndexInCell][col] = new Tile(cell[ChasingIndexInCell], null, null);
+
 				if(ChasingIndexInCell % 2 == 0){
 					cell[ChasingIndexInCell] -= 1;
 				}
@@ -90,7 +91,6 @@ public class Board {
 			cell = cell + 1;
 		}*/
 
-		// สร้าง player ซึ่งกำหนดไว้แค่ 2 คน
 		Player player1 = new Player(1);
 		this.player1 = player1;
 
@@ -141,26 +141,27 @@ public class Board {
 		for (int rows = 0; rows < 10; rows++) {
 
 			for (int columns = 0; columns < 10; columns++) {
+
 				if (tile[rows][columns].snake == null && tile[rows][columns].ladder == null) {
 					if (tile[rows][columns].value == 100)
-						System.out.print(tile[rows][columns].value + " "); // 100 99
+						System.out.print(tile[rows][columns].value + " ");
 					else if (tile[rows][columns].value >= 11 && tile[rows][columns].value <= 99)
-						System.out.print(tile[rows][columns].value + "  ");// 99 98
+						System.out.print(tile[rows][columns].value + "  ");
 					else if (tile[rows][0].value == 1)
-						System.out.print(tile[rows][columns].value + "   ");// 1 2 3
+						System.out.print(tile[rows][columns].value + "   ");
 				} else if (tile[rows][columns].snake == null && tile[rows][columns].ladder != null) {
 					System.out.print("=   "); // print ladder
 				} else if (tile[rows][columns].snake != null && tile[rows][columns].ladder == null) {
 					System.out.print("*   "); // print Snake
 				}
 			}
+
 			System.out.println("");
 		}
 		System.out.println("");
 	}
 
 	public boolean WhoTheWinner() {
-
 		if (this.player1.position == 100) {
 			System.out.println("Congrats! Player1 won!");
 			return true;
@@ -173,24 +174,27 @@ public class Board {
 	}
 
 	public void rollDice(String player) {
-		int DiceValue = dice.getDiceValue();
-		System.out.println("Random Dice Value generated = " + DiceValue);
+		//TODO : เปลี่ยนชื่อให้มันเหมือนกัน
+		int DiceFace = dice.getDiceValue();
+		System.out.println("Random Dice Value generated = " + DiceFace);
 		System.out.println("");
 
 		if (player.equals("player1")) {
 			int current = this.player1.position ;
-			if (this.player1.position + DiceValue > 100) {
+
+			if (this.player1.position + DiceFace > 100) {
 				current = this.player1.position;
 			} else {
-				current = this.player1.position + DiceValue;
+				current = this.player1.position + DiceFace;
 			}
 
+			//TODO : ลบ s ออก
 			int rows = RowIndexOfTile(current);
 			int columns = ColIndexOfTile(current);
 
 			if ((tile[rows][columns].ladder == null) && (tile[rows][columns].snake == null)) {
-				if ((this.player1.position + DiceValue) <= 100)
-				this.player1.position = this.player1.position + DiceValue;
+				if ((this.player1.position + DiceFace) <= 100)
+				this.player1.position = this.player1.position + DiceFace;
 				System.out.println("Player1's Current Position = " + this.player1.position);
 				System.out.println("Player2's Current Position = " + this.player2.position);
 			} else if ((tile[rows][columns].ladder != null) && (tile[rows][columns].snake == null)) {
@@ -207,17 +211,18 @@ public class Board {
 		} else if (player.equals("player2")) {
 			int current = this.player2.position;
 
-			if (this.player2.position + DiceValue > 100) {
+			if (this.player2.position + DiceFace > 100) {
 				current = this.player2.position;
 			} else {
-				current = this.player2.position + DiceValue;
+				current = this.player2.position + DiceFace;
 			}
+
 			int rows = RowIndexOfTile(current);
 			int columns = ColIndexOfTile(current);
 
 			if ((tile[rows][columns].ladder == null) && (tile[rows][columns].snake == null)) {
-				if ((this.player2.position + DiceValue) <= 100)
-				this.player2.position = this.player2.position + DiceValue;
+				if ((this.player2.position + DiceFace) <= 100)
+				this.player2.position = this.player2.position + DiceFace;
 				System.out.println("Player1's Current Position = " + this.player1.position);
 				System.out.println("Player2's Current Position = " + this.player2.position);
 			} else if ((tile[rows][columns].ladder != null) && (tile[rows][columns].snake == null)) {
@@ -243,11 +248,14 @@ public class Board {
 				}
 			}
 		}
+
 		return -1;
+
 	}
 
+	//O(n^2) => O(1)
+	//TODO : ตั้งชื่อ parameter ให้เหมือนกัน
 	private int ColIndexOfTile(int GetCurrentCol) {
-
 		for (int rows = 0; rows < 10; rows++) {
 			for (int columns = 0; columns < 10; columns++) {
 				if (this.tile[rows][columns].value == GetCurrentCol) {
@@ -255,8 +263,7 @@ public class Board {
 				}
 			}
 		}
+
 		return -1;
-
 	}
-
 }
